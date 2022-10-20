@@ -1,0 +1,30 @@
+<?xml version="1.0" ?>
+
+<robot name="highbay">
+
+  <link name="highbay_link">
+
+    <inertial>
+      <origin rpy="0.0 0 0" xyz="0 0 0"/>
+      <mass value=".0"/>
+      <inertia ixx="0" iyy="0" izz="0"/>
+    </inertial>
+
+    <visual>
+      <origin rpy="1.75 0 -1.68" xyz="-1.5 4.6 3.9"/>
+      <geometry>
+        <mesh filename="highbay.obj" scale="4.5 4.5 4.5"/>
+      </geometry> 
+      <material name="white">
+        <color rgba="1 1 1 1"/>
+      </material> 
+    </visual>
+
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 -0.1"/>
+      <geometry>
+         <box size="30 30 0.01"/>
+      </geometry>
+    </collision>  
+  </link>
+</robot>

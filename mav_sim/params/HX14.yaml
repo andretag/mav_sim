@@ -1,0 +1,51 @@
+# Robot and simulation parameters 
+# for an hexacopter. 
+
+# Simulation parameters
+sim:
+  gravity: 9.80655                # [m/s^2]
+  pos_control_step_freq: 10       # [Hz]
+  attitude_control_step_freq: 100 # [Hz]
+  physics_freq: 200               # [Hz], step frequency
+  gui: False
+  use_random_background: False
+  urdf_model_name: "HX14.urdf"
+  use_rpy_intrisic_convention: False    # Switch between rpy intrisic/extrinsic convention. False: use extrinsics (pybullet default)
+
+# UAV parameters
+rbt:
+  # Physic parameters
+  mass: 1.3                               # mav total mass [Kg] 
+  inertia: [0.0082, 0.0082, 0.0126]       # Diag inertia tensor [ms^2]. Is this loaded from the urdf?
+  max_thrust_per_g: 1.5                   # [g]
+  lin_drag_constant: 0.1                  # [g/s]
+  quad_drag_constant: 0.01                # [N/m^2]
+  angvel_drag: 0.00001                    # ~ guess
+  act_delay: 0.00                         # [ms]
+
+  # Powertrain and actuators
+  torque_limit: 10.0                            # [Nm] TODO: Andrea: which value is going to be meaningfull? ~1 for octabee
+  max_thrust_per_motor: 12.95                   # [N] per motor
+  inverse_thrust_curve_ccw: [6.776583, 0.0]     # PWM to thrust, snap_sim
+  inverse_thrust_curve_cw: [5.204733, 0.0]      # PWM to thrust, snap_sim
+  torque_curve_ccw: [0.135532, 0.0]             # PWM to torque, snap_sim
+  torque_curve_cw: [0.104094, 0.0]              # PWM to torque, snap_sim
+  prop_thrust_to_torque_coeff: 0.02             # thrust force to torque, cd in snap   
+  thrust_curve_cw: [0.192133, 0.0]              # thrust to PWM, snap
+  thrust_curve_ccw: [0.147567, 0.0]             # thrust to PWM, snap
+  n_motors: 6
+  motor_spin_direction: [-1, 1, -1, 1, -1, 1]
+
+# Geometric controller parameters
+# Note: the inertia of the robot is loaded from its URDF file ("robot_urdf"). Set this to match its inertia.
+ctr: 
+  open_loop: False
+  inertia: [0.0082, 0.0082, 0.0126]                          # np.diag(np.array([0.008, 0.008, 0.012]))
+  attitude_gains: [1.1, 1.1, 1.1]                         # np.array([4.25, 4.25, 2.0])
+  angular_rate_gains: [0.33, 0.33, 0.33]                  # np.array([1.12, 1.12, 0.8])
+  mass: 1.3                                               # Robot mass - set as the one from URDF
+  gravity: 9.80655                                        # [dm/s^2] Match mass from sim! (sim/gravity)
+
+# HX14 specific parameters: 
+HX14: 
+  arm_length: 0.165                                       # [m]
